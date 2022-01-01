@@ -1,19 +1,8 @@
-function globalInit(){
-    canvas.width = document.documentElement.clientWidth;
-    canvas.height = document.documentElement.clientHeight;
+let e = new Example('default');
 
-    init()
-}
-
-
-function init(){
-    
-    draw();
-}
-
-function draw() {
+e.draw = () => {
     var ctx = canvas.getContext('2d');
-    ctx.translate(300,200);
+    ctx.translate(10, 10);
 
     for (var i = 0; i < 6; i++) {
         for (var j = 0; j < 6; j++) {
@@ -24,3 +13,4 @@ function draw() {
     }
 }
 
+nav.add(e);

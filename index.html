@@ -17,10 +17,22 @@
 
         nav {
             position: absolute;
-            width: 10%;
-            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 5px 0;
+            
+            /* border: 1px solid rgba(0, 0, 255, 0.4);
+            border-width: 0 1px 1px 0;
+            background-color: rgba(0, 0, 255, 0.2); */
+        }
 
-            background-color: rgba(0, 0, 255, 0.4);
+
+        button{
+            margin: 5px 5px 5px 0  ;
+
+            color: white;
+            background-color: rgba(0, 0, 255, 0.2);
+            border: 1px solid rgba(0, 0, 255, 0.4);
         }
     </style>
 </head>
@@ -28,17 +40,12 @@
 <body onload="globalInit();">
 
     <canvas id='canvas'></canvas>
-
-    <nav>
-        123123123
-    </nav>
-
-
-
-    <!-- <script src="react.production.min"></script> -->
-    <!-- <script src="react-dom.production.min.js"></script> -->
+    <nav id='nav'></nav>
+    
+    <script src="main.js"></script>
+    
     <script src="ExampleClass.js"></script>
-    <script src="graphics.js"></script>
+    <script src="examples/default.js"></script>
 </body>
 
 </html>
