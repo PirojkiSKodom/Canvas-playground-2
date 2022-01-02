@@ -5,7 +5,7 @@ nav.add = function (example) {
     button.innerHTML = example.name;
 
     button.addEventListener('click', (function () {
-        console.log(`setting ${example.name}`);
+        //console.log(`setting ${example.name}`);
 
         nav.current?.unmount();
         nav.current = example;

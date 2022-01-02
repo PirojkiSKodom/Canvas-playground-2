@@ -1,10 +1,17 @@
 class Example {
 
     init() { this.draw(); }
+    dispose() {}
 
     draw() { }
 
-    //internal methods
+    keydown(event) { }
+    keyup(event) { }
+    mousedown(event) { }
+    mouseup(event) { }
+    mousemove(event) { }
+
+    //------------internal methods (you can overwrite them ofc but you don't need to)
     mount(parent) {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
@@ -25,11 +32,14 @@ class Example {
 
     unmount() {
         this.canvas.remove();
+        this.dispose();
     }
 
     resize() {
         this.canvas.width = this.canvas.parentElement.clientWidth;
         this.canvas.height = this.canvas.parentElement.clientHeight;
+
+        this.init();
     }
 
 
