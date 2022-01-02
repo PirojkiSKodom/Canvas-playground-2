@@ -8,6 +8,8 @@
         body {
             margin: 0;
             padding: 0;
+            overflow: hidden;
+            background-color: black;
         }
 
         canvas {
@@ -15,20 +17,27 @@
             background-color: black;
         }
 
+        nav::-webkit-scrollbar{
+            width: 0;
+        }
+
         nav {
+            max-height: 100%;
             position: absolute;
             display: flex;
             flex-direction: column;
             padding: 5px 0;
-            
+            overflow-y: auto;
+            overflow-x: hidden;
+
             /* border: 1px solid rgba(0, 0, 255, 0.4);
             border-width: 0 1px 1px 0;
             background-color: rgba(0, 0, 255, 0.2); */
         }
 
 
-        button{
-            margin: 5px 5px 5px 0  ;
+        button {
+            margin: 5px 5px 5px 0;
 
             color: white;
             background-color: rgba(0, 0, 255, 0.2);
@@ -41,11 +50,12 @@
 
     <canvas id='canvas'></canvas>
     <nav id='nav'></nav>
-    
+
     <script src="main.js"></script>
-    
+
     <script src="ExampleClass.js"></script>
     <script src="examples/default.js"></script>
+    <script src="examples/lolkek.js"></script>
 </body>
 
 </html>
