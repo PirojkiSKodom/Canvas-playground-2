@@ -1,5 +1,10 @@
 class Example {
 
+    init() { this.draw(); }
+
+    draw() { }
+
+    //internal methods
     mount(parent) {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
@@ -14,9 +19,11 @@ class Example {
         document.onmousemove = this.mousemove?.bind(this);
         document.onkeydown = this.keydown?.bind(this);
         document.onkeyup = this.keyup?.bind(this);
+
+        this.init();
     }
-    
-    unmount(){
+
+    unmount() {
         this.canvas.remove();
     }
 

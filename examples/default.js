@@ -1,5 +1,7 @@
 
 
+let d = new Example('ololo');
 
-nav.add(new Example('ololo'));
+
+nav.add(d);
 
