@@ -19,7 +19,7 @@ class EtudeExample extends Example {
     }
 
     draw() {
-        this.etude.fillWith((x, y) => rgba(0, y * y + x * x + this.delta, 0));
+        this.etude.fillWith((x, y) => rgba(0, 128 + 128 * Math.sin((x ** 3 / y ** 2 + this.delta) / 50) , 0));
 
         this.ctx.drawImage(this.etude, 0, 0);
         

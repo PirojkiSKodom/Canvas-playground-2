@@ -1,6 +1,7 @@
 class MouseMoveExample extends Example {
     init() {
         this.ctx.fillStyle = `rgba(255, 0, 0, 0.2)`;
+        this.ctx.fillRect(0,0,0,0);
     }
 
     mousemove(event) {
