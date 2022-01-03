@@ -29,7 +29,7 @@ class SaluteExample extends Example {
                 angle: Math.random()*2*Math.PI,
                 angleAccel: 0,
                 angleAccelAccel: (Math.random() - 0.5) / 10,
-                lifetime: 300,
+                lifetime: 200 + Math.floor(Math.random()*100),
                 color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
             }));
         }

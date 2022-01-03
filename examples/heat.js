@@ -1,4 +1,4 @@
-class WaterExample extends Example {
+class HeatExample extends Example {
 
 
     init() {
@@ -20,8 +20,8 @@ class WaterExample extends Example {
         let x = Math.floor(event.clientX / this.n);
         let y = Math.floor(event.clientY / this.n);
 
-        this.pool.cells1[x][y] = 10000;
-        this.pool.cells1[x+1][y] = 10000;
+        this.pool.cells1[x][y] = 100000;
+        this.pool.cells1[x+1][y] = 100000;
 
     }
 
@@ -34,7 +34,7 @@ class WaterExample extends Example {
     }
 
     constructor() {
-        super('WaterExample');
+        super('HeatExample');
     }
 }
 
@@ -60,9 +60,9 @@ class Pool {
         [this.cells1, this.cells2] = [this.cells2, this.cells1];
 
         this.etude.fillWith((x, y) => ({
-            r: 0,
+            r: Math.abs(this.cells1[x][y]),
             g: 0,
-            b: Math.abs(this.cells1[x][y]),
+            b: 0,
             a: 255,
         }));
     }
@@ -97,4 +97,4 @@ class Pool {
 
 
 
-nav.add(new WaterExample);
+nav.add(new HeatExample);
