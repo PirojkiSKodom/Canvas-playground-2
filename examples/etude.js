@@ -19,10 +19,14 @@ class EtudeExample extends Example {
     }
 
     draw() {
-        this.etude.fillWith((x, y) => rgba(0, 128 + 128 * Math.sin((x ** 3 / y ** 2 + this.delta) / 50) , 0));
+        this.etude.fillWith((x, y) => {
+            x = (x - this.etude.width / 2) / 2;
+            y = (y - this.etude.height / 2) / 2;
+            return rgba(0, 128 + 128 * Math.sin((x ** 2 / x * y + y ** 2 / x * y + this.delta) / 50), 0);
+        });
 
         this.ctx.drawImage(this.etude, 0, 0);
-        
+
         this.delta += 3;
         this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
     }
