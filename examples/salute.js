@@ -6,30 +6,29 @@ class SaluteExample extends Example {
         this.ctx.lineWidth = 3;
         this.ctx.lineJoin = 'round';
 
-        this.step = 1;
         this.lastx = 0;
         this.lasty = 0;
 
-        this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
-
-
+        if (!this.cancelToken)
+            this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
     }
-
 
     dispose() {
         window.cancelAnimationFrame(this.cancelToken);// оч важн
+        this.cancelToken = null;
     }
+
 
     mousedown(event) {
         for (let i = 0; i < 20; i++) {
             this.rockets.push(new Rocket({
                 x: event.clientX,
                 y: event.clientY,
-                stepLength: 5 + Math.random()*10,
-                angle: Math.random()*2*Math.PI,
+                stepLength: 5 + Math.random() * 10,
+                angle: Math.random() * 2 * Math.PI,
                 angleAccel: 0,
                 angleAccelAccel: (Math.random() - 0.5) / 10,
-                lifetime: 200 + Math.floor(Math.random()*100),
+                lifetime: 200 + Math.floor(Math.random() * 100),
                 color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
             }));
         }
@@ -38,14 +37,11 @@ class SaluteExample extends Example {
 
 
     mousemove(event) {
-        this.step++;
-
         let dx = event.clientX - this.lastx;
         let dy = event.clientY - this.lasty;
         let length = Math.sqrt(dx ** 2 + dy ** 2);
         let angle = Math.atan((dy) / (dx));
 
-        //if (this.step % 5 == 0)
         this.rockets.push(new Rocket({
             x: event.clientX,
             y: event.clientY,
@@ -82,7 +78,7 @@ class SaluteExample extends Example {
     }
 
     constructor() {
-        super('SaluteExample');
+        super('Salute');
         this.rockets = [];
 
     }

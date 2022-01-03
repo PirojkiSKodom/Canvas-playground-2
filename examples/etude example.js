@@ -1,9 +1,7 @@
 class EtudeExample extends Example {
 
     init() {
-
-
-        this.etude = new Etude(500, 500);
+        if (!this.etude) this.etude = new Etude(500, 500);
         this.delta = 0;
 
 
@@ -11,11 +9,13 @@ class EtudeExample extends Example {
             Math.floor(this.canvas.width / 2 - this.etude.width / 2),
             Math.floor(this.canvas.height / 2 - this.etude.height / 2));
 
+        if (!this.cancelToken)
         this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
     }
 
     dispose() {
         window.cancelAnimationFrame(this.cancelToken);// оч важн
+        this.cancelToken = null;
     }
 
     draw() {
@@ -32,7 +32,7 @@ class EtudeExample extends Example {
     }
 
     constructor() {
-        super('EtudeExample');
+        super('Etude example');
     }
 }
 

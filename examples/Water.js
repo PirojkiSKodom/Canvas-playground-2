@@ -1,27 +1,36 @@
-class HeatExample extends Example {
+class WaterExample extends Example {
 
 
     init() {
 
-        this.n = 3;
-        this.pool = new Pool(Math.floor(this.canvas.width / this.n), Math.floor(this.canvas.height / this.n));
+        this.nx = 3;
+        this.ny = 3;
+
+        this.pool = new Pool(Math.floor(this.canvas.width / this.nx), Math.floor(this.canvas.height / this.ny));
         this.ctx.imageSmoothingEnabled = false;
 
-
-        this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
+        if (!this.cancelToken)
+            this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
     }
 
 
     dispose() {
         window.cancelAnimationFrame(this.cancelToken);// оч важн
+        this.cancelToken = null;
+    }
+
+    afterResize() {
+        this.nx = this.canvas.width / this.pool.width;
+        this.ny = this.canvas.height / this.pool.height;
     }
 
     mousedown(event) {
-        let x = Math.floor(event.clientX / this.n);
-        let y = Math.floor(event.clientY / this.n);
+        let x = Math.floor(event.clientX / this.nx);
+        let y = Math.floor(event.clientY / this.ny);
 
-        this.pool.cells1[x][y] = 100000;
-        this.pool.cells1[x+1][y] = 100000;
+        let dropSize = 10000;
+        this.pool.cells1[x][y] = dropSize;
+        this.pool.cells1[x + 1][y] = dropSize;
 
     }
 
@@ -34,20 +43,21 @@ class HeatExample extends Example {
     }
 
     constructor() {
-        super('HeatExample');
+        super('Water');
     }
 }
 
 class Pool {
     func(x, y) {
         let avg = (
-            this.cells1[x - 1][y] +
             this.cells1[x][y - 1] +
             this.cells1[x + 1][y] +
-            this.cells1[x][y + 1]) / 4
+            this.cells1[x][y + 1] +
+            this.cells1[x - 1][y]) / 4;
 
+        const omega = 1.999;
 
-        return avg ;
+        return avg * omega + (1 - omega) * this.cells2[x][y];
     }
 
     step() {
@@ -60,9 +70,9 @@ class Pool {
         [this.cells1, this.cells2] = [this.cells2, this.cells1];
 
         this.etude.fillWith((x, y) => ({
-            r: Math.abs(this.cells1[x][y]),
+            r: 0,
             g: 0,
-            b: 0,
+            b: Math.abs(this.cells1[x][y]),
             a: 255,
         }));
     }
@@ -97,4 +107,4 @@ class Pool {
 
 
 
-nav.add(new HeatExample);
+nav.add(new WaterExample);
