@@ -24,9 +24,9 @@ class Example {
 
         parent.append(this.canvas);
 
-        this.canvas.onmousedown = this.mousedown.bind(this);
-        this.canvas.onmouseup = this.mouseup.bind(this);
-        this.canvas.onmousemove = this.mousemove.bind(this);
+        document.onmousedown = this.mousedown.bind(this);
+        document.onmouseup = this.mouseup.bind(this);
+        document.onmousemove = this.mousemove.bind(this);
 
         this.__bkd = this.keydown.bind(this);//kostily
         this.__bku = this.keyup.bind(this);//kostily

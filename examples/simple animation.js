@@ -17,8 +17,8 @@ class SimpleAnimation extends Example {
 
     draw() {
         this.ctx.drawImage(this.peka, -this.peka.width/2, -this.peka.height/2);
-        this.ctx.rotate(0.1);
-        this.ctx.translate(15,0);
+        this.ctx.rotate(0.02);
+        this.ctx.translate(7,0);
 
         this.cancelToken = window.requestAnimationFrame(this.draw.bind(this));
     }
