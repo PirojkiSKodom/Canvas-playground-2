@@ -1,7 +1,10 @@
 class Example {
+    //-------внешние методы 
 
     init() { this.draw(); }
-    dispose() {}
+    dispose() { }
+
+    afterResize() { this.init(); }
 
     draw() { }
 
@@ -11,7 +14,7 @@ class Example {
     mouseup(event) { }
     mousemove(event) { }
 
-    //------------internal methods (you can overwrite them ofc but you don't need to)
+    //-------внутренние методы (поидее и внешних должно на все хватать)
     mount(parent) {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
@@ -39,7 +42,7 @@ class Example {
         this.canvas.width = this.canvas.parentElement.clientWidth;
         this.canvas.height = this.canvas.parentElement.clientHeight;
 
-        this.init();
+        this.afterResize();
     }
 
 
