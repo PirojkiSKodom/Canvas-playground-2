@@ -19,12 +19,22 @@
         В ExampleClass.js лежит класс <strong>Example</strong> - предок всех примеров в песочнице
     </p>
     <p>
-        Cоздадим объект <strong>Example</strong>, у него есть холст (<strong>Canvas</strong>) и методы типа
+        Мысленно создадим объект <strong>Example</strong>, у него есть холст (<strong>Canvas</strong>) и методы типа
         <strong>draw()</strong> для рисования на нем
     </p>
     <p>
-        Cам по себе этот объект существует в вакууме, чтобы его увидеть надо его куда нибуть встроить 
+        Cам по себе этот объект существует в вакууме, чтобы его увидеть надо его куда-нибудь встроить 
         для этого у него есть метод <strong>mount(parent)</strong> в любой HTML элемент контейнер, собсна
     </p>
-
+</div>
+<div>
+    <p>
+        На главной странице <strong>index.html</strong> есть контейнер div с id="easel"(aka мольберт) и менюшка nav
+    </p>
+    <img src="doc files/images/Screenshot_1.png" />
+    <p>
+        у nav есть метод <strong>nav.add(exampleObject);</strong> этот метод создает в меню кнопку при нажатии на которую
+        срабатывает <strong>exampleObject.mount(easel)</strong> и холст монтируется в мольберт
+    </p>
+    
 </div>
