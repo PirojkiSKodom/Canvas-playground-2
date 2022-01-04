@@ -20,18 +20,7 @@ class SaluteExample extends Example {
 
 
     mousedown(event) {
-        for (let i = 0; i < 20; i++) {
-            this.rockets.push(new Rocket({
-                x: event.clientX,
-                y: event.clientY,
-                stepLength: 5 + Math.random() * 10,
-                angle: Math.random() * 2 * Math.PI,
-                angleAccel: 0,
-                angleAccelAccel: (Math.random() - 0.5) / 10,
-                lifetime: 200 + Math.floor(Math.random() * 100),
-                color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
-            }));
-        }
+
     }
 
 
@@ -58,6 +47,21 @@ class SaluteExample extends Example {
     }
 
     draw() {
+
+        if (MBPressed.has(0)) {
+            this.rockets.push(new Rocket({
+                x: cursor.x,
+                y: cursor.y,
+                stepLength: 5 + Math.random() * 20,
+                angle: Math.random() * 2 * Math.PI,
+                angleAccel: 0,
+                angleAccelAccel: (Math.random() - 0.5) / 5,
+                lifetime: 200 + Math.floor(Math.random() * 100),
+                color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+            }));
+
+        }
+
         for (let r of this.rockets) {
             let sx = r.x;
             let sy = r.y;

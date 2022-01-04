@@ -24,12 +24,16 @@ class Example {
 
         parent.append(this.canvas);
 
-        document.onmousedown = this.mousedown.bind(this);
-        document.onmouseup = this.mouseup.bind(this);
-        document.onmousemove = this.mousemove.bind(this);
+        this.__bmd = this.mousedown.bind(this);//kostily
+        this.__bmu = this.mouseup.bind(this);//kostily
+        this.__bmm = this.mousemove.bind(this);//kostily
 
         this.__bkd = this.keydown.bind(this);//kostily
         this.__bku = this.keyup.bind(this);//kostily
+
+        document.addEventListener('mousedown', this.__bmd);//kostily
+        document.addEventListener('mouseup', this.__bmu);//kostily
+        document.addEventListener('mousemove', this.__bmm);//kostily
 
         document.addEventListener('keydown', this.__bkd);//kostily
         document.addEventListener('keyup', this.__bku);//kostily
@@ -40,6 +44,10 @@ class Example {
     unmount() {
         this.canvas.remove();
         this.dispose();
+
+        document.removeEventListener('mousedown', this.__bmd);//kostily
+        document.removeEventListener('mouseup', this.__bmu);//kostily
+        document.removeEventListener('mousemove', this.__bmm);//kostily
 
         document.removeEventListener('keydown', this.__bkd);//kostily
         document.removeEventListener('keyup', this.__bku);//kostily

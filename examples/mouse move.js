@@ -7,7 +7,6 @@ class MouseMoveExample extends Example {
     mousemove(event) {
         let circle = new Path2D();
         circle.arc(event.clientX, event.clientY, 25, 0, 2 * Math.PI);
-
         this.ctx.fill(circle);
     }
 

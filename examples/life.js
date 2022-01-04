@@ -28,15 +28,17 @@ class LifeExample extends Example {
         this.ctx.imageSmoothingEnabled = false;
     }
 
-    mousedown(event) {
-        let x = Math.floor(event.clientX / this.nx);
-        let y = Math.floor(event.clientY / this.ny);
-
-        this.pool.cells1[x][y] = 1;
-    }
-
     draw() {
         this.pool.step();
+
+        if (MBPressed.has(0)){
+            let x = Math.floor(cursor.x / this.nx)-1;
+            let y = Math.floor(cursor.y / this.ny)-1;
+
+            this.pool.cells1[x][y] = 1;
+        }
+
+        this.pool.draw();
 
         this.ctx.drawImage(this.pool.etude, 0, 0, this.canvas.width, this.canvas.height);
 
@@ -45,7 +47,7 @@ class LifeExample extends Example {
     }
 
     constructor() {
-        super('Life');
+        super(`Conway's Game of Life`);
     }
 }
 
@@ -67,6 +69,15 @@ class LifePool {
         return this.cells1[x][y];
     }
 
+    draw(){
+        this.etude.fillWith((x, y) => ({
+            r: 0,
+            g: this.cells1[x][y] * 255,
+            b: 0,
+            a: 255,
+        }));
+    }
+
     step() {
         for (let x = 1; x < this.width - 1; x++) {
             for (let y = 1; y < this.height - 1; y++) {
@@ -76,12 +87,7 @@ class LifePool {
 
         [this.cells1, this.cells2] = [this.cells2, this.cells1];
 
-        this.etude.fillWith((x, y) => ({
-            r: 0,
-            g: this.cells1[x][y] * 255,
-            b: 0,
-            a: 255,
-        }));
+        
     }
 
 
@@ -95,15 +101,21 @@ class LifePool {
         for (let x = 0; x < w; x++) {
             this.cells1[x] = [];
             for (let y = 0; y < h; y++) {
-                this.cells1[x][y] = Math.random() > 0.5 ? 1 : 0;
+                this.cells1[x][y] = 0;
             }
         }
-
+        
         this.cells2 = [];
         for (let x = 0; x < w; x++) {
             this.cells2[x] = [];
             for (let y = 0; y < h; y++) {
                 this.cells2[x][y] = 0;
+            }
+        }
+
+        for (let x = 1; x < w-1; x++) {
+            for (let y = 1; y < h-1; y++) {
+                this.cells1[x][y] = Math.random() > 0.5 ? 1 : 0;
             }
         }
     }

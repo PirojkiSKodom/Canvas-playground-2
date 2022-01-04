@@ -1,8 +1,8 @@
-(()=>{
+(() => {// <------ самовызывающаяся стрелочная функция
 
     let e = new Example('namespace example');
 
-    e.init = function(){
+    e.init = function () {
         this.ctx.translate(200, 200);
         this.draw();
     }

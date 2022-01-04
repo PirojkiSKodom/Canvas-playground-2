@@ -10,6 +10,18 @@ let keysPressed = new Set();
 document.addEventListener('keydown', e => keysPressed.add(e.code));
 document.addEventListener('keyup', e => keysPressed.delete(e.code));
 
+let MBPressed = new Set();
+document.addEventListener('mousedown', e => MBPressed.add(e.button));
+document.addEventListener('mouseup', e => MBPressed.delete(e.button));
+
+let cursor = {
+    x: 0,
+    y: 0,
+}
+document.addEventListener('mousemove', e => {
+    cursor.x = e.clientX;
+    cursor.y = e.clientY;
+});
 
 //--------------------nav
 nav.current = null;
