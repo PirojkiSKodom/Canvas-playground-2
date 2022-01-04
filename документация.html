@@ -10,9 +10,9 @@
 
 <body>
     <nav id='nav'>
-        <ul>
+        <ul id='mainUl'>
             <li><button class="PGLink" onclick="location.href = 'index.html'">песочница</button></li>
-            <li><button onclick="getContent('doc files/pages/title.html')">вступление</button></li>
+            <li><button id='startPageButton' data-link='doc files/pages/title.html'>вступление</button></li>
             <li><button onclick="getContent('doc files/pages/ways to define example.html')">определяем пример</button></li>
             <li><button onclick="getContent('doc files/dummy.html')">dummy</button></li>
             <li>Чай</li>
@@ -62,6 +62,16 @@
             main.innerHTML = await content.text();
         }
         getContent('doc files/pages/title.html');
+
+        let currentPage = document.getElementById('startPageButton');
+        currentPage.className = 'current';
+        mainUl.onclick = (e)=>{
+            if(e.target.dataset.link) getContent(e.target.dataset.link);
+            
+            currentPage.className = '';
+            currentPage = e.target;
+            currentPage.className = 'current';
+        };
     </script>
 
 
