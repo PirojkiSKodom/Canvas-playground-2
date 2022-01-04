@@ -24,17 +24,14 @@ class WaterExample extends Example {
         this.ny = this.canvas.height / this.pool.height;
     }
 
-    mousedown(event) {
-        let x = Math.floor(event.clientX / this.nx);
-        let y = Math.floor(event.clientY / this.ny);
-
-        let dropSize = 10000;
-        this.pool.cells1[x][y] = dropSize;
-        this.pool.cells1[x + 1][y] = dropSize;
-
-    }
 
     draw() {
+        if (MBPressed.has(0)){//left mouse button
+            let x = Math.floor(cursor.x / this.nx);
+            let y = Math.floor(cursor.y / this.ny);
+            this.pool.cells1[x][y] += 1000;
+        }
+
         this.pool.step();
 
         this.ctx.drawImage(this.pool.etude, 0, 0, this.canvas.width, this.canvas.height);

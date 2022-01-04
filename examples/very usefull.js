@@ -9,7 +9,7 @@ class UsefullExample extends Example {
         this.etude.camera.speed = 20;
         this.etude.camera.zoomSpeed = 1.1;
 
-        this.etude.ctx.font = '48px serif';
+        this.etude.ctx.font = '20px serif';
         this.etude.ctx.fillStyle = `rgb(255,255,255)`
 
         this.ctx.fillStyle = `rgb(0,34,34)`;
@@ -17,8 +17,8 @@ class UsefullExample extends Example {
 
         this.ctx.fillStyle = `rgb(255,255,255)`;
         this.ctx.font = '15px serif';
-        this.ctx.fillText(`WASD ZX - управление камерой, FG - изменить N, черное - x||y < 0, красное - произведение меньше суммы,`, 120, 20); 
-        this.ctx.fillText(`синее - больше, зеленое - в точности равно сумме (то шо мы ищем), блеклое - x||y > N`, 120, 40);
+        this.ctx.fillText(`WASD ZX - управление камерой, FG - изменить N, мы типа берем 2 числа x и y из промежутка (1-n), находим сумму оставшихся и закрашиваем точку (x,y) цветом`, 120, 20); 
+        this.ctx.fillText(`черное - x||y < 0, красное - произведение x*y меньше суммы, синее - больше, зеленое - в точности равно сумме (то шо мы ищем), блеклое - x||y > N`, 120, 40);
 
         this.ctx.translate(
             Math.floor(this.canvas.width / 2 - this.etude.width / 2),
@@ -61,7 +61,7 @@ class UsefullExample extends Example {
             return result;
         });
 
-        this.etude.ctx.fillText(`N = ${this.n}`, 10, 40);
+        this.etude.ctx.fillText(`N = ${this.n}`, 5, 20);
 
         this.ctx.drawImage(this.etude, 0, 0);
 

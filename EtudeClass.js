@@ -4,7 +4,9 @@ class Etude extends HTMLCanvasElement {
         let i = 0;
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
-                let truepos = this.camera.transform(x - this.width / 2, y - this.height / 2);
+                //let truepos = this.camera.transform(x - this.width / 2, y - this.height / 2);
+                
+                let truepos = this.camera.transform(x , y );
                 let cl = fillFunc(truepos.x, truepos.y);
                 this.ImageData.data[i++] = cl.r;
                 this.ImageData.data[i++] = cl.g;
