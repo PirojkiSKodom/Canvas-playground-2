@@ -5,20 +5,65 @@
     <meta charset="utf-8">
     <title>Canvas playground docs</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-
+    <link rel="stylesheet" href="doc files/style.css">
 </head>
 
 <body>
-    <p>
-        которая еще не написана
-    </p>
+    <nav id='nav'>
+        <ul>
+            <li><button class="PGLink" onclick="location.href = 'index.html'">песочница</button></li>
+            <li><button onclick="getContent('doc files/pages/title.html')">вступление</button></li>
+            <li><button onclick="getContent('doc files/dummy.html')">dummy</button></li>
+            <li>Чай</li>
+            <li>Молоко</li>
+            <li>Кофе</li>
+            <li>Чай</li>
+            <li>Кофе</li>
+            <li>Чай</li>
+            <li>Молоко</li>
+            <li>Кофе</li>
+            <li>Чай</li>
+            <li>Кофе</li>
+            <li>Чай</li>
+            <li>Молоко</li>
+            <li>Кофе</li>
+            <li>Чай</li>
+            
+        </ul>
+    </nav>
 
-    <p>
-        Ребята не стоит вскрывать эту тему. Вы молодые, шутливые, вам все легко. Это не то. Это не Чикатило и даже не архивы
-        спецслужб. Сюда лучше не лезть. Серьезно, любой из вас будет жалеть. Лучше закройте тему и забудьте что тут писалось. Я
-        вполне понимаю что данным сообщением вызову дополнительный интерес, но хочу сразу предостеречь пытливых - стоп.
-        Остальных просто не найдут.
-    </p>
+    <main id='main'></main>
+
+    <script>
+        (async () => {
+            try {
+                await fetch('doc files/dummy.html');
+            } catch (e) {
+                if (e.message == 'NetworkError when attempting to fetch resource.') {
+                    console.log(e);
+                    alert(`NetworkError: ты открыл документацию, но сделал это без уважения`);
+                    alert(`нет, серьезно, я не могу подгрузить часть файла со своего же компа, из той же папки, потому что это видите ли небезопасно и противоречит политике CORS`);
+                    alert(`открой документацию через live server , ну или подожди пока я напишу скрипт который соединяет всю документацию в одну гиганскую страницу, пека `);
+                    let link = document.createElement('a');
+                    link.href = "https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer";
+                    link.innerHTML = 'про live server';
+
+                    main.innerHTML = '';
+                    main.append(link);
+                }
+            }
+        })();
+    </script>
+
+    <script>
+        async function getContent(address){
+            let content = await fetch(address);
+            main.innerHTML = await content.text();
+        }
+        getContent('doc files/pages/title.html');
+    </script>
+
+
 </body>
 
 </html>
