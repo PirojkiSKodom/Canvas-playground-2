@@ -23,6 +23,7 @@ let articles = {
         async get() {
             let r = await fetch(this.link);
             main.innerHTML = await r.text();
+            window.scrollTo(0, 0);
         }
 
         constructor(title, link) {
@@ -44,6 +45,8 @@ let articles = {
 articles.add('вступление', 'doc files/pages/вступление.html');
 articles.add('как определить Example', 'doc files/pages/как определить Example.html');
 articles.add('обзор Example', 'doc files/pages/обзор Example.html');
+articles.add('нюансы', 'doc files/pages/нюансы.html');
 articles.add('dummy', 'doc files/dummy.html');
 
-articles.get('обзор Example');
+articles.get('нюансы');
+

@@ -1,0 +1,67 @@
+<h1>
+    Всякие нюансы
+</h1>
+<h2>
+    Как перерисовывать сцену
+</h2>
+<div>
+    <p>
+        Чтобы что-то нарисовать один раз, достаточно вызвать <strong>draw()</strong> один раз
+    </p>
+    <p>Но как перерисовывать сцену периодически?</p>
+    <p>Вот так не сработает:</p>
+    <img src="doc files/images/Screenshot_9.png" />
+    <p>
+        Потому что javaScript однопоточный, пока выполняется функция экран не перерисовывается, 
+        события не обрабатываются, <a href="https://learn.javascript.ru/event-loop">вот тут подробнее</a>
+    </p>
+</div>
+<h3>
+    Есть еще 2 способа
+</h3>
+<div>
+    <h4>
+        <a href="https://learn.javascript.ru/settimeout-setinterval">setTimeout()</a>
+    </h4>
+    <p>
+        Можно вызвать <strong>setTimeout(this.draw, 50);</strong> это вызовет this.draw через 50 миллисекунд
+    </p>
+    <p>
+        <strong>setTimeout(this.draw, 0);</strong> - перерисовать срочна! (но после обновления экрана)
+    </p>
+    <h4>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">window.requestAnimationFrame()</a>
+    </h4>
+    <p> Рекомендованый Mozilla способ</p>
+    <p> 
+        <strong>window.requestAnimationFrame(this.draw)</strong> выполняет функцию <strong>this.draw</strong>
+        ровно перед следующей перерисовкой экрана
+    </p>
+    <p>
+        А экран перерисовывается 60 раз в секунду <blockquote>"The number of callbacks is usually 60 times per second, but will generally match the display refresh rate in most web
+        browsers as per W3C recommendation"</blockquote>
+    </p>
+</div>
+<h2>
+    Потеря this
+</h2>
+<div>
+    <p>
+        Когда ты передаешь <strong>this.draw</strong>, например, в <strong>setTimeout(this.draw, 0);</strong>
+        может показаться что и <strong>this</strong> передастся и будет доступен внутри <strong>draw</strong>
+    </p>
+    <img src="doc files/images/Screenshot_10.png" />
+    <p>
+        Но нет, <strong>this</strong> не передастся, <strong>setTimeout</strong> 
+        установит this в <strong>window</strong> и будет так
+    </p>
+    <img src="doc files/images/Screenshot_11.png" />
+    <p>
+        Это <a href="https://learn.javascript.ru/bind">типичная проблема</a> с колбэками
+    </p>
+    <p>
+        Чтобы ее избежать привязывай <strong>this</strong> при передаче, вот так:
+    </p>
+    <img src="doc files/images/Screenshot_12.png" />
+</div>
+
