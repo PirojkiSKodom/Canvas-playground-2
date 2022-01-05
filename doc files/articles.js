@@ -49,5 +49,5 @@ articles.add('нюансы', 'doc files/pages/нюансы.html');
 articles.add('дополнительные инструменты', 'doc files/pages/дополнительные инструменты.html');
 articles.add('dummy', 'doc files/dummy.html');
 
-articles.get('нюансы');
+articles.get('вступление');
 

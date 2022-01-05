@@ -21,7 +21,7 @@
     <script defer src="doc files/articles.js"></script>
 
 
-    
+
     <template id="onCors">
         <div>
             <p>
@@ -34,7 +34,7 @@
             <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">рисование</a>
             <a href="https://g.zeos.in/?q=javaScript%20html%20css">javaScript html css</a>
         </div>
-        
+
         <h1>
             Итак, как все устроено
         </h1>
@@ -43,7 +43,8 @@
                 В ExampleClass.js лежит класс <strong>Example</strong> - предок всех примеров в песочнице
             </p>
             <p>
-                Мысленно создадим объект <strong>Example</strong>, у него есть холст (<strong>Canvas</strong>) и методы типа
+                Мысленно создадим объект <strong>Example</strong>, у него есть холст (<strong>Canvas</strong>) и методы
+                типа
                 <strong>draw()</strong> для рисования на нем
             </p>
             <p>
@@ -53,37 +54,42 @@
         </div>
         <div>
             <p>
-                На главной странице <strong>index.html</strong> есть контейнер div с id="easel"(aka мольберт) и менюшка nav
+                На главной странице <strong>index.html</strong> есть контейнер div с id="easel"(aka мольберт) и менюшка
+                nav
             </p>
             <img src="doc files/images/Screenshot_1.png" />
             <p>
-                у nav есть метод <strong>nav.add(exampleObject);</strong> этот метод создает в меню кнопку при нажатии на
+                у nav есть метод <strong>nav.add(exampleObject);</strong> этот метод создает в меню кнопку при нажатии
+                на
                 которую
                 срабатывает <strong>exampleObject.mount(easel)</strong> и холст монтируется в мольберт
             </p>
         </div>
-        
+
         <div>
             <p>
                 Итак, чтобы создать пример нужно:
             </p>
             <p>
-                1. <strong>let ololo = new Example('имя примера которое будет в меню');</strong> создать объект Example (или его
+                1. <strong>let ololo = new Example('имя примера которое будет в меню');</strong> создать объект Example
+                (или его
                 наследника)
             </p>
             <p>
                 2. <strong>nav.add(ololo);</strong> добавить его в меню
             </p>
             <p>
-                Если ты создал этот объект в отдельном файле, то его надо еще подключить к основному <strong>index.html</strong>
+                Если ты создал этот объект в отдельном файле, то его надо еще подключить к основному
+                <strong>index.html</strong>
                 добавив <br> <strong>&lt;script src="путь к файлу/мой пример.js">&lt;/script></strong> к другим ссылкам
             </p>
             <img src="doc files/images/Screenshot_2.png" />
             <p>
-                Кстати эти файлы добавляются в меню в порядке подключения, и при открытии страницы в мольберт монтируется первый
+                Кстати эти файлы добавляются в меню в порядке подключения, и при открытии страницы в мольберт
+                монтируется первый
             </p>
         </div>
-        
+
         <h1>
             Как определить Example?
         </h1>
@@ -93,7 +99,8 @@
                 в любом месте файла, но это плохая идея
             </p>
             <p>
-                ololo создается в глобальной области видимости, и если в двух файлах определить ololo будет конфликт имен
+                ololo создается в глобальной области видимости, и если в двух файлах определить ololo будет конфликт
+                имен
             </p>
             <p>
                 Это засоряет глобальный объект
@@ -104,12 +111,14 @@
         </h2>
         <div>
             <p>
-                Можно, но как оказалось скрипт-модуль нельзя загрузить из локального файла потому что это противоречит политике
+                Можно, но как оказалось скрипт-модуль нельзя загрузить из локального файла потому что это противоречит
+                политике
                 CORS
             </p>
             <p>
                 Если открыть песочницу(<strong>index.html</strong>) браузером, то модуль не загрузится, но если
-                открыть песочницу<a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">live
+                открыть песочницу<a
+                    href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">live
                     server'ом</a>
                 то все будет работать
             </p>
@@ -143,7 +152,8 @@
         </h2>
         <div>
             <p>
-                Все три способа работают, лично я предпочитаю наследование, потому что имхо это ближе всего к происходящему,
+                Все три способа работают, лично я предпочитаю наследование, потому что имхо это ближе всего к
+                происходящему,
                 но ты как хочешь
             </p>
             <p>
@@ -154,7 +164,7 @@
             </p>
             <img src="doc files/images/Screenshot_6.png" />
         </div>
-        
+
         <h1>
             Шо есть в Example?
         </h1>
@@ -198,7 +208,214 @@
                 Можешь пойти посмотреть примеры для вдохновения
             </p>
         </div>
+        <h1>
+            Всякие нюансы
+        </h1>
+        <h2>
+            Как перерисовывать сцену
+        </h2>
+        <div>
+            <p>
+                Чтобы что-то нарисовать один раз, достаточно вызвать <strong>draw()</strong> один раз
+            </p>
+            <p>Но как перерисовывать сцену периодически?</p>
+            <p>Вот так не сработает:</p>
+            <img src="doc files/images/Screenshot_9.png" />
+            <p>
+                Потому что javaScript однопоточный, пока выполняется функция экран не перерисовывается,
+                события не обрабатываются, <a href="https://learn.javascript.ru/event-loop">вот тут подробнее</a>
+            </p>
+        </div>
+        <h3>
+            Есть еще 2 способа
+        </h3>
+        <div>
+            <h4>
+                <a href="https://learn.javascript.ru/settimeout-setinterval">setTimeout()</a>
+            </h4>
+            <p>
+                Можно вызвать <strong>setTimeout(this.draw, 50);</strong> это вызовет this.draw через 50 миллисекунд
+            </p>
+            <p>
+                <strong>setTimeout(this.draw, 0);</strong> - перерисовать срочна! (но после обновления экрана)
+            </p>
+            <h4>
+                <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">window.requestAnimationFrame()</a>
+            </h4>
+            <p> Рекомендованый Mozilla способ</p>
+            <p>
+                <strong>window.requestAnimationFrame(this.draw)</strong> выполняет функцию <strong>this.draw</strong>
+                ровно перед следующей перерисовкой экрана
+            </p>
+            <p>
+                А экран перерисовывается 60 раз в секунду
+            <blockquote>"The number of callbacks is usually 60 times per second, but will generally match the display
+                refresh
+                rate in most web
+                browsers as per W3C recommendation"</blockquote>
+            </p>
+        </div>
+        <h2>
+            Потеря this
+        </h2>
+        <div>
+            <p>
+                Когда ты передаешь <strong>this.draw</strong>, например, в <strong>setTimeout(this.draw, 0);</strong>
+                может показаться что и <strong>this</strong> передастся и будет доступен внутри <strong>draw</strong>
+            </p>
+            <img src="doc files/images/Screenshot_10.png" />
+            <p>
+                Но нет, <strong>this</strong> не передастся, <strong>setTimeout</strong>
+                установит this в <strong>window</strong> и будет так
+            </p>
+            <img src="doc files/images/Screenshot_11.png" />
+            <p>
+                Это <a href="https://learn.javascript.ru/bind">типичная проблема</a> с колбэками
+            </p>
+            <p>
+                Чтобы ее избежать привязывай <strong>this</strong> при передаче, вот так:
+            </p>
+            <img src="doc files/images/Screenshot_12.png" />
+        </div>
+        <h2>
+            Атмена рисования
+        </h2>
+        <div>
+            <p>
+                Если в <strong>init()</strong> ты вызываешь <strong>draw()</strong>, а <strong>draw()</strong>
+                вызывает себя, например, через <strong>setTimeout(this.draw.bind(this), 0);</strong>
+                то <strong>draw()</strong> будет выполнятся бесконечно
+            </p>
+            <p>
+                Если ты еще раз откроешь этот же пример, снова вызовется <strong>init()</strong>
+                и запустится еще один параллельный цикл рисования
+            </p>
+            <p>
+                Чтобы этого не произошло прошлый цикл надо остановить, для этого в <strong>Example</strong>
+                я создал метод <strong>dispose()</strong>
+            </p>
+        </div>
+        <div>
+            <p>
+                Всякие решения типа добавить <strong>Example</strong> своство типа <strong>alive</strong>
+                и вызвать <strong>setTimeout(this.draw.bind(this), 0);</strong> только если <strong>this.alive ==
+                    true</strong>
+                работают криво, потому что если ты переоткрываешь тот же пример сначала <strong>dispose()</strong>
+                ставит <strong>this.alive = false</strong>, а затем <strong>init()</strong> тут же ставит
+                <strong>this.alive = true</strong>
+            </p>
+        </div>
+        <h4>
+            К счастью есть культурное решение
+        </h4>
+        <div>
+            <p>
+                <strong>setTimeout</strong> возвращает timerId и ты можешь отменить запланированое действие
+                с помощью <strong>clearTimeout(timerId);</strong>
+            </p>
+            <img src="doc files/images/Screenshot_13.png" />
+        </div>
 
+        <div>
+            <p>
+                <strong>window.requestAnimationFrame()</strong> возвращает cancelToken и ты можешь отменить
+                запланированое
+                действие
+                с помощью <strong>window.cancelAnimationFrame(cancelToken);</strong>
+            </p>
+            <img src="doc files/images/Screenshot_14.png" />
+        </div>
+        <h2>
+            Множественный init
+        </h2>
+        <div>
+            <p>
+                <strong>init()</strong> вызывается каждый раз при открытии примера и при изменении размера
+                <strong>Canvas</strong>
+            </p>
+            <p>
+                Если ты хочешь чтобы что-то делалось один раз, проверь не сделано ли оно уже, например,
+                загрузка картинки
+            </p>
+            <img src="doc files/images/Screenshot_15.png" />
+
+            <p>
+                Проверить не запущен ли еще один цикл рисования можно чекнув <strong>this.cancelToken</strong>
+            </p>
+            <img src="doc files/images/Screenshot_16.png" />
+            <p>
+                Чтобы <strong>init()</strong> не вызывался каждый раз при изменении размера холста
+                можно поставить <strong>afterResize() { this.draw(); }</strong>
+                или даже <strong>afterResize() { //ничего }</strong>
+            </p>
+        </div>
+        <h1>
+            Дополнительные инструменты
+        </h1>
+        <h2>
+            В файле Main.js определены всякие удобные штуки
+        </h2>
+        <div>
+            <p><strong>keysPressed</strong> - множество с кодами нажатых в данный момент кнопок клавиатуры</p>
+            <p>
+                <strong>MBPressed</strong> - множество нажатых в данный момент кнопок мыши <br>
+                0 - LMB, 2 - RMB
+            </p>
+            <p>
+                <strong>cursor</strong> - объект с текущими координатами курсора
+                <strong>cursor.x</strong> и <strong>cursor.y</strong>
+            </p>
+            <p>
+                Функция <strong>function rgba(r = 0, g = 0, b = 0, a = 255)</strong> - возвращает объект
+                цвета который ждет функция заполнения этюда
+            </p>
+        </div>
+        <h2>
+            Этюд
+        </h2>
+        <div>
+            <p>
+                Это еще один холст (буквально наследник HTMLCanvasElement) который нужен чтобы сначала
+                на нем рисовать какой-то кусок картины, а потом рисовать его на основном холсте
+            </p>
+            <p>
+                У него есть метод <strong>fillWith(fillFunc)</strong> который принимает функцию заполнения
+                и закрашивает каждый пиксель этюда согласно этой функции
+            </p>
+            <p>
+                <strong>fillFunc(x, y)</strong> принимает координаты пикселя этюда и возвращает объект цвета
+                <strong>{ r:r, g:g, b:b, a:a}</strong>
+            </p>
+            <p>
+                У него есть контекст рисования на нем самом <strong>this.ctx</strong>
+            </p>
+            <p>
+                Нарисовать этюд на основном холсте можно так же как и любой другой объект <strong>Canvas</strong>
+                <br><strong>this.ctx.drawImage(this.etude, 0, 0);</strong>
+            </p>
+            <p>
+                создать этюд с высотой и шириной можно так:
+            </p>
+            <img src="doc files/images/Screenshot_17.png" />
+        </div>
+        <h3>
+            Камера этюда
+        </h3>
+        <div>
+            <p>
+                У этюда есть объект камеры, он позволяет осматриватся на этюде если он нарисован через функцию
+                заполнения
+            </p>
+            <p>
+                Чтобы сдвинуть камеру в зависимости от нажатых кнопок просто вызови
+            </p>
+            <img src="doc files/images/Screenshot_18.png" />
+            <p>
+                Хоткеи: WASD - влево вправо, ZX - приблизить отдалить, + - изменить скорость зума
+            </p>
+
+        </div>
     </template>
 </body>
 
