@@ -4,9 +4,6 @@ class EtudeExample extends Example {
         if (!this.etude) this.etude = new Etude(500, 500);
         this.delta = 0;
 
-        console.log(this.etude.camera);
-
-
 
         this.ctx.translate(
             Math.floor(this.canvas.width / 2 - this.etude.width / 2),

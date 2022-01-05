@@ -4,7 +4,12 @@ class SimpleAnimation extends Example {
         if (!this.peka){
             this.peka = new Image();
             this.peka.onload = this.draw.bind(this);
-            this.peka.src = "https://stickerboom.ru/files/2014/11/13/1735x03a8-300x300.png";
+            this.peka.onerror = () => {
+                alert('stickerboom.ru - лег, достаю пеку из загашника');
+                this.peka.src = "doc files/images/back up yoba.png";
+            }
+            //this.peka.src = "https://stickerboom.ru/files/2014/11/13/1735x03a8-300x300.png";
+            this.peka.src = "doc files/images/back up yoba.png";//похоже он лег навсегда :(
         }
 
         this.ctx.translate(this.canvas.width / 2, 100);
