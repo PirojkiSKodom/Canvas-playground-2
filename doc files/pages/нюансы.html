@@ -64,4 +64,49 @@
     </p>
     <img src="doc files/images/Screenshot_12.png" />
 </div>
+<h2>
+    Атмена рисования
+</h2>
+<div>
+    <p>
+        Если в <strong>init()</strong> ты вызываешь <strong>draw()</strong>, а <strong>draw()</strong>
+        вызывает себя, например, через <strong>setTimeout(this.draw.bind(this), 0);</strong>
+        то <strong>draw()</strong> будет выполнятся бесконечно
+    </p>
+    <p>
+        Если ты еще раз откроешь этот же пример, снова вызовется <strong>init()</strong>
+        и запустится еще один параллельный цикл рисования
+    </p>
+    <p>
+        Чтобы этого не произошло прошлый цикл надо остановить, для этого в <strong>Example</strong>
+        я создал метод <strong>dispose()</strong>
+    </p>
+</div>
+<div>
+    <p>
+        Всякие решения типа добавить <strong>Example</strong> своство типа <strong>alive</strong>
+        и вызвать <strong>setTimeout(this.draw.bind(this), 0);</strong> только если <strong>this.alive == true</strong>
+        работают криво, потому что если ты переоткрываешь тот же пример сначала <strong>dispose()</strong>
+        ставит <strong>this.alive = false</strong>, а затем <strong>init()</strong> тут же ставит
+        <strong>this.alive = true</strong>
+    </p>
+</div>
+<h4>
+    К счастью есть культурное решение
+</h4>
+<div>
+    <p>
+        <strong>setTimeout</strong> возвращает timerId и ты можешь отменить запланированое действие
+        с помощью <strong>clearTimeout(timerId);</strong>
+    </p>
+    <img src="doc files/images/Screenshot_13.png" />
+</div>
+
+<div>
+    <p>
+        <strong>window.requestAnimationFrame()</strong> возвращает cancelToken и ты можешь отменить запланированое действие
+        с помощью <strong>window.cancelAnimationFrame(cancelToken);</strong>
+    </p>
+    <img src="doc files/images/Screenshot_14.png" />
+</div>
 
