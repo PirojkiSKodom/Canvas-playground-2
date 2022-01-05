@@ -17,84 +17,189 @@
 
     <main id='main'></main>
 
-    <script>
-        (async () => {
-            try {
-                await fetch('doc files/dummy.html');
-            } catch (e) {
-                if (e.message == 'NetworkError when attempting to fetch resource.') {
-                    console.log(e);
-                    alert(`NetworkError: ты открыл документацию, но сделал это без уважения`);
-                    alert(`нет, серьезно, я не могу подгрузить часть файла со своего же компа, из той же папки, потому что это видите ли небезопасно и противоречит политике CORS`);
-                    alert(`открой документацию через live server , ну или подожди пока я напишу скрипт который соединяет всю документацию в одну гиганскую страницу, пека `);
-                    let link = document.createElement('a');
-                    link.href = "https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer";
-                    link.innerHTML = 'про live server';
-
-                    main.innerHTML = '';
-                    main.append(link);
-                }
-            }
-        })();
-    </script>
+    <script defer src="doc files/Cors.js"></script>
+    <script defer src="doc files/articles.js"></script>
 
 
+    
+    <template id="onCors">
+        <div>
+            <p>
+                Для начала хорошо бы чуть чуть знать html, css, javaScript и как с его помощью рисовать
+            </p>
+            <a href="http://htmlbook.ru/samhtml">htmlbook.ru</a>
+            <a href="https://schoolsw3.com/html/index.php">schoolsw3</a>
+            <a href="https://learn.javascript.ru/">Современный учебник JavaScript</a>
+            <a href="https://developer.mozilla.org/ru/">MDN Web Docs</a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">рисование</a>
+            <a href="https://g.zeos.in/?q=javaScript%20html%20css">javaScript html css</a>
+        </div>
+        
+        <h1>
+            Итак, как все устроено
+        </h1>
+        <div>
+            <p>
+                В ExampleClass.js лежит класс <strong>Example</strong> - предок всех примеров в песочнице
+            </p>
+            <p>
+                Мысленно создадим объект <strong>Example</strong>, у него есть холст (<strong>Canvas</strong>) и методы типа
+                <strong>draw()</strong> для рисования на нем
+            </p>
+            <p>
+                Cам по себе этот объект существует в вакууме, чтобы его увидеть надо его куда-нибудь встроить<br>
+                для этого у него есть метод <strong>mount(parent)</strong> в любой HTML элемент контейнер, собсна
+            </p>
+        </div>
+        <div>
+            <p>
+                На главной странице <strong>index.html</strong> есть контейнер div с id="easel"(aka мольберт) и менюшка nav
+            </p>
+            <img src="doc files/images/Screenshot_1.png" />
+            <p>
+                у nav есть метод <strong>nav.add(exampleObject);</strong> этот метод создает в меню кнопку при нажатии на
+                которую
+                срабатывает <strong>exampleObject.mount(easel)</strong> и холст монтируется в мольберт
+            </p>
+        </div>
+        
+        <div>
+            <p>
+                Итак, чтобы создать пример нужно:
+            </p>
+            <p>
+                1. <strong>let ololo = new Example('имя примера которое будет в меню');</strong> создать объект Example (или его
+                наследника)
+            </p>
+            <p>
+                2. <strong>nav.add(ololo);</strong> добавить его в меню
+            </p>
+            <p>
+                Если ты создал этот объект в отдельном файле, то его надо еще подключить к основному <strong>index.html</strong>
+                добавив <br> <strong>&lt;script src="путь к файлу/мой пример.js">&lt;/script></strong> к другим ссылкам
+            </p>
+            <img src="doc files/images/Screenshot_2.png" />
+            <p>
+                Кстати эти файлы добавляются в меню в порядке подключения, и при открытии страницы в мольберт монтируется первый
+            </p>
+        </div>
+        
+        <h1>
+            Как определить Example?
+        </h1>
+        <div>
+            <p>
+                казалось бы просто пишем <strong>let ololo = new Example('имя примера которое будет в меню');</strong>
+                в любом месте файла, но это плохая идея
+            </p>
+            <p>
+                ololo создается в глобальной области видимости, и если в двух файлах определить ololo будет конфликт имен
+            </p>
+            <p>
+                Это засоряет глобальный объект
+            </p>
+        </div>
+        <h2>
+            Так давайте создадим модуль! модули же как раз сделаны чтобы изолировать переменные
+        </h2>
+        <div>
+            <p>
+                Можно, но как оказалось скрипт-модуль нельзя загрузить из локального файла потому что это противоречит политике
+                CORS
+            </p>
+            <p>
+                Если открыть песочницу(<strong>index.html</strong>) браузером, то модуль не загрузится, но если
+                открыть песочницу<a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">live
+                    server'ом</a>
+                то все будет работать
+            </p>
+            <p>
+                Чтобы объявить скрипт модулем нужно добавить ему атрибут <strong>type='module'</strong>
+            </p>
+            <img src="doc files/images/Screenshot_3.png" />
+        </div>
+        <h2>
+            Старый добрый способ
+        </h2>
+        <div>
+            <p>
+                Еще можно обернуть весь код в самовызывающуюся стрелочную функцию, тогда все переменные станут
+                локальными переменными этой функции и конфликта не будет
+            </p>
+            <img src="doc files/images/Screenshot_4.png" />
+        </div>
+        <h2>
+            Наследование класса
+        </h2>
+        <div>
+            <p>
+                Еще можно создать класс наследник <strong>Example</strong> и передать nav его объект,
+                вообще не создавая переменных
+            </p>
+            <img src="doc files/images/Screenshot_5.png" />
+        </div>
+        <h2>
+            Выбирай любой
+        </h2>
+        <div>
+            <p>
+                Все три способа работают, лично я предпочитаю наследование, потому что имхо это ближе всего к происходящему,
+                но ты как хочешь
+            </p>
+            <p>
+                В папке <strong>examples/ways to define example</strong> лежат примеры всех трех способов
+            </p>
+            <p>
+                Чтобы подключить их к песочнице раскомментируй эти скрипты
+            </p>
+            <img src="doc files/images/Screenshot_6.png" />
+        </div>
+        
+        <h1>
+            Шо есть в Example?
+        </h1>
+        <div>
+            <p>
+                В нем есть холст <strong>this.canvas</strong> и контекст <strong>this.ctx</strong>
+            </p>
+            <img src="doc files/images/Screenshot_7.png" />
+            <p>
+                Все рисование происходит на контексте рисования <strong>this.ctx</strong>, но ширина и высота холста
+                берется из <strong>this.canvas.width this.canvas.height</strong>
+            </p>
+            <p>
+                Это не я придумал, так <strong>canvas</strong> сделан
+            </p>
+            <p>
+                Холст автоматически растягивается чтобы занять весь экран, можно не парится
+            </p>
+        </div>
+        <h2>
+            Еще у него есть методы
+        </h2>
+        <div>
+            <img src="doc files/images/Screenshot_8.png" />
+            <p>
+                По умолчанию после <strong>init()</strong> происходит <strong>draw()</strong>,
+                а после <strong>afterResize()</strong> происходит <strong>init()</strong>
+            </p>
+            <p>
+                Не обязательно рисовать только в <strong>draw()</strong>, это просто выделеный для этого метод
+            </p>
+        </div>
+        <h2>
+            Собсна, все!
+        </h2>
+        <div>
+            <p>
+                Создай свой Example, перепиши его методы чтобы рисовали то что ты хочешь, и добавь его в nav
+            </p>
+            <p>
+                Можешь пойти посмотреть примеры для вдохновения
+            </p>
+        </div>
 
-
-    <script>
-        let articles = {
-            current: undefined,
-            add: function (title = 'вступление', link = 'doc files/pages/вступление.html') {
-                let art = new this.Article(title, link);
-                this[art.title] = art;
-                art.button.onclick = () => {
-                    this.get(art.title);
-                }
-            },
-            get: function (title) {
-                if (this.current) this.current.li.className = '';
-                this.current = this[title];
-                this.current.li.className = 'current';
-
-                this.current.get();
-            },
-
-            Article: class {
-                mount() {
-                    mainUl.append(this.li);
-                }
-
-                async get() {
-                    let r = await fetch(this.link);
-                    main.innerHTML = await r.text();
-                }
-
-                constructor(title, link) {
-                    this.title = title;
-                    this.link = link;
-
-                    this.li = document.createElement('li');
-                    this.button = document.createElement('button');
-                    this.button.innerHTML = this.title;
-
-                    this.li.append(this.button);
-
-                    this.mount();
-                }
-            }
-        };
-
-
-        articles.add('вступление', 'doc files/pages/вступление.html');
-        articles.add('как определить Example', 'doc files/pages/как определить Example.html');
-        articles.add('обзор Example', 'doc files/pages/обзор Example.html');
-        articles.add('dummy', 'doc files/dummy.html');
-
-        articles.get('обзор Example');
-
-    </script>
-
-
+    </template>
 </body>
 
 </html>
