@@ -46,6 +46,7 @@ articles.add('вступление', 'doc files/pages/вступление.html'
 articles.add('как определить Example', 'doc files/pages/как определить Example.html');
 articles.add('обзор Example', 'doc files/pages/обзор Example.html');
 articles.add('нюансы', 'doc files/pages/нюансы.html');
+articles.add('дополнительные инструменты', 'doc files/pages/дополнительные инструменты.html');
 articles.add('dummy', 'doc files/dummy.html');
 
 articles.get('нюансы');

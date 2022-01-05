@@ -12,7 +12,7 @@
     <p>Вот так не сработает:</p>
     <img src="doc files/images/Screenshot_9.png" />
     <p>
-        Потому что javaScript однопоточный, пока выполняется функция экран не перерисовывается, 
+        Потому что javaScript однопоточный, пока выполняется функция экран не перерисовывается,
         события не обрабатываются, <a href="https://learn.javascript.ru/event-loop">вот тут подробнее</a>
     </p>
 </div>
@@ -30,15 +30,18 @@
         <strong>setTimeout(this.draw, 0);</strong> - перерисовать срочна! (но после обновления экрана)
     </p>
     <h4>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">window.requestAnimationFrame()</a>
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">window.requestAnimationFrame()</a>
     </h4>
     <p> Рекомендованый Mozilla способ</p>
-    <p> 
+    <p>
         <strong>window.requestAnimationFrame(this.draw)</strong> выполняет функцию <strong>this.draw</strong>
         ровно перед следующей перерисовкой экрана
     </p>
     <p>
-        А экран перерисовывается 60 раз в секунду <blockquote>"The number of callbacks is usually 60 times per second, but will generally match the display refresh rate in most web
+        А экран перерисовывается 60 раз в секунду
+    <blockquote>"The number of callbacks is usually 60 times per second, but will generally match the display refresh
+        rate in most web
         browsers as per W3C recommendation"</blockquote>
     </p>
 </div>
@@ -52,7 +55,7 @@
     </p>
     <img src="doc files/images/Screenshot_10.png" />
     <p>
-        Но нет, <strong>this</strong> не передастся, <strong>setTimeout</strong> 
+        Но нет, <strong>this</strong> не передастся, <strong>setTimeout</strong>
         установит this в <strong>window</strong> и будет так
     </p>
     <img src="doc files/images/Screenshot_11.png" />
@@ -104,9 +107,34 @@
 
 <div>
     <p>
-        <strong>window.requestAnimationFrame()</strong> возвращает cancelToken и ты можешь отменить запланированое действие
+        <strong>window.requestAnimationFrame()</strong> возвращает cancelToken и ты можешь отменить запланированое
+        действие
         с помощью <strong>window.cancelAnimationFrame(cancelToken);</strong>
     </p>
     <img src="doc files/images/Screenshot_14.png" />
 </div>
+<h2>
+    Множественный init
+</h2>
+<div>
+    <p>
+        <strong>init()</strong> вызывается каждый раз при открытии примера и при изменении размера
+        <strong>Canvas</strong>
+    </p>
+    <p>
+        Если ты хочешь чтобы что-то делалось один раз, проверь не сделано ли оно уже, например,
+        загрузка картинки
+    </p>
+    <img src="doc files/images/Screenshot_15.png" />
 
+    <p>
+        Проверить не запущен ли еще один цикл рисования можно чекнув <strong>this.cancelToken</strong>
+    </p>
+    <img src="doc files/images/Screenshot_16.png" />
+    <p>
+        Чтобы <strong>init()</strong> не вызывался каждый раз при изменении размера холста
+        можно поставить <strong>afterResize() { this.draw(); }</strong> 
+        или даже <strong>afterResize() { //ничего }</strong> 
+    </p>
+</div>
+<button class="nextButton" onclick="articles.get('дополнительные инструменты');">дополнительные инструменты</button>
