@@ -1,0 +1,31 @@
+nav {
+    background-color: rgb(103, 34, 109);
+    border: 2mm ridge rgb(195, 3, 209);
+    border-top: none;
+    border-left: none;
+
+    position: fixed;
+    align-self: stretch;
+
+    flex:  0 0 50mm;
+
+    color: white;
+}
+
+nav li{
+    list-style-type:katakana;
+    margin: 2mm;
+    border :1px solid rgba(0,0,0,0);
+    border-bottom: 1px solid black;  
+}
+
+.PGLink {
+     border-bottom: 2px solid black;
+     height: 20mm;
+}
+
+
+.current {
+    border: 1px solid black;
+}
+
