@@ -27,6 +27,10 @@ main button{
 
 }
 
+main button:hover{
+    background-color: #567297;
+}
+
 
 
 h1 {
