@@ -1,53 +1,37 @@
-let articles = {
-    current: undefined,
-    add: function (title = 'вступление', link = 'doc files/pages/вступление.html') {
-        let art = new this.Article(title, link);
-        this[art.title] = art;
-        art.button.onclick = () => {
-            this.get(art.title);
-        }
-    },
-    get: function (title) {
-        if (this.current) this.current.li.className = '';
-        this.current = this[title];
-        this.current.li.className = 'current';
+main.append(document.getElementById('template-вступление.html').content.cloneNode(true));
 
-        this.current.get();
-    },
+let pageList = document.getElementById('pageList');
 
-    Article: class {
-        mount() {
-            mainUl.append(this.li);
+pageList.current = null;
+pageList.pages = {};
+
+for (let li of pageList.querySelectorAll('li')) {
+    let link = li.getAttribute('data-link');
+
+    if (link){
+        li.onclick = (e) => {
+            document.dispatchEvent(new CustomEvent("openPage", {
+                bubbles: true,
+                detail: link,
+            }));
         }
 
-        async get() {
-            let r = await fetch(this.link);
-            main.innerHTML = await r.text();
-            window.scrollTo(0, 0);
-        }
-
-        constructor(title, link) {
-            this.title = title;
-            this.link = link;
-
-            this.li = document.createElement('li');
-            this.button = document.createElement('button');
-            this.button.innerHTML = this.title;
-
-            this.li.append(this.button);
-
-            this.mount();
-        }
+        pageList.pages[link] = li;
     }
-};
+}
 
 
-articles.add('вступление', 'doc files/pages/вступление.html');
-articles.add('как определить Example', 'doc files/pages/как определить Example.html');
-articles.add('обзор Example', 'doc files/pages/обзор Example.html');
-articles.add('нюансы', 'doc files/pages/нюансы.html');
-articles.add('дополнительные инструменты', 'doc files/pages/дополнительные инструменты.html');
-articles.add('dummy', 'doc files/dummy.html');
+document.addEventListener('openPage', (e) => {
+    if (e.detail){
 
-articles.get('вступление');
+        if (pageList.current) pageList.current.className = '';
+        pageList.current = pageList.pages[e.detail];
+        pageList.pages[e.detail].className = 'current';
+
+        main.innerHTML = '';
+        main.append(document.getElementById(`template-${e.detail}`).content.cloneNode(true));
+    }
+});
+
+
 

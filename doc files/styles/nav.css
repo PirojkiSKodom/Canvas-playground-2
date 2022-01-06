@@ -1,22 +1,36 @@
 nav {
-    background-color: rgb(103, 34, 109);
-    border: 2mm ridge rgb(195, 3, 209);
-    border-top: none;
-    border-left: none;
+    background-color: #966b3d;
+    border: 2mm ridge #815625;
 
-    position: fixed;
-    align-self: stretch;
+    position: absolute;
 
-    flex:  0 0 50mm;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100%;
 
+    box-sizing: border-box;
+    
     color: white;
 }
 
 nav li{
-    list-style-type:katakana;
+    list-style-type:none;
     margin: 2mm;
     border :1px solid rgba(0,0,0,0);
     border-bottom: 1px solid black;  
+}
+
+nav button {
+    width: 100%;
+
+    color: white;
+    font-size: 1em;
+    background-color: rgba(0, 255, 0, 0);
+}
+
+nav button:hover{
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .PGLink {
