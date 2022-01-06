@@ -44,7 +44,7 @@ function addTemplates() {
     let s = '';
     for (page of pages) {
         let pageContent = fs.readFileSync(__dirname + `/pages/${page}`, "utf8");
-        pageContent = preprocess(pageContent);
+        //pageContent = preprocess(pageContent); неа
         s +=
             `
 <template id="template-${page}">
@@ -61,10 +61,9 @@ function preprocess(text) {
         .split('\n')
         .map(word => word.trim());
 
-    if (wordList.length == 1 && wordList[0] == '') return text;
-
     wordList.forEach(word => {
-        text = text.replace(new RegExp(word, 'g'), `<strong>${word}</strong>`);
+        if (word != '')
+            text = text.replace(new RegExp(`${word}`, 'g'), `<strong>${word}</strong>`);
     })
     return text;
 }

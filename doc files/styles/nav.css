@@ -1,13 +1,10 @@
 nav {
-    background-color: #966b3d;
-    border: 2mm ridge #815625;
+    background-color: #50647f;
+    border: 2mm ridge #5c7997;
 
-    position: absolute;
 
-    top: 0;
-    left: 0;
-    width: 15%;
-    height: 100%;
+    flex: 1 0 15%;
+
 
     box-sizing: border-box;
     
@@ -18,6 +15,8 @@ nav li{
     list-style-type:none;
     margin: 2mm;
     border :1px solid rgba(0,0,0,0);
+
+    box-sizing: border-box;
     border-bottom: 1px solid black;  
 }
 
@@ -33,7 +32,7 @@ nav button:hover{
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.PGLink {
+#PGLink {
      border-bottom: 2px solid black;
      height: 20mm;
 }

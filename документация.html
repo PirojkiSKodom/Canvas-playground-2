@@ -9,14 +9,19 @@
     <link rel="stylesheet" href="doc files/styles/main.css">
 </head>
 <body>
-    <nav id="nav">
-        <button id='PGLink'>Песочница</button>
-        <div id="pageList">
-            <li data-link='вступление.html'><button>вступление</button></li>
-            <li data-link='нюансы.html'><button>нюансы</button></li>
-        </div>
-    </nav>
-    <main id="main"></main>
+    <div id='flexContainer'>
+        <nav id="nav">
+            <button id='PGLink' onclick="window.location.href='index.html'">Песочница</button>
+            <div id="pageList">
+                <li data-link='вступление.html'><button>вступление</button></li>
+                <li data-link='как определить Example.html'><button>как определить Example</button></li>
+                <li data-link='обзор Example.html'><button>обзор Example</button></li>
+                <li data-link='нюансы.html'><button>нюансы</button></li>
+                <li data-link='дополнительные инструменты.html'><button>дополнительные инструменты</button></li>
+            </div>
+        </nav>
+        <main id="main"></main>
+    </div>
     <script defer src="doc files/scripts/articles.js"></script>
 
 <template id="template-вступление.html">
@@ -38,7 +43,7 @@
 </h1>
 <div>
     <p>
-        В ExampleClass.js лежит класс <strong>Example</strong> - предок всех примеров в песочнице
+        В <strong>ExampleClass.js</strong> лежит класс <strong>Example</strong> - предок всех примеров в песочнице
     </p>
     <p>
         Мысленно создадим объект <strong>Example</strong>, у него есть холст (<strong>Canvas</strong>) и методы типа
@@ -80,7 +85,7 @@
     </p>
 </div>
 
-<button class="nextButton" onclick="articles.get('как определить Example');">дальше</button>
+<button class="nextButton" onclick="goto('как определить Example.html');">дальше</button>
 
 
 
@@ -151,7 +156,6 @@
     <p>
         Хоткеи: WASD - влево вправо, ZX - приблизить отдалить, + - изменить скорость зума
     </p>
-   
 </div>
 
 </template>
@@ -225,7 +229,7 @@
     </p>
     <img src="doc files/images/Screenshot_6.png" />
 </div>
-<button class="nextButton" onclick="articles.get('обзор Example');">дальше</button>
+<button class="nextButton" onclick="goto('обзор Example.html');">дальше</button>
 
 
 </template>
@@ -370,7 +374,7 @@
         или даже <strong>afterResize() { //ничего }</strong> 
     </p>
 </div>
-<button class="nextButton" onclick="articles.get('дополнительные инструменты');">дополнительные инструменты</button>
+<button class="nextButton" onclick="goto('дополнительные инструменты.html');">дополнительные инструменты</button>
 </template>
 
 <template id="template-обзор Example.html">
@@ -417,7 +421,7 @@
         Можешь пойти посмотреть примеры для вдохновения
     </p>
 </div>
-<button class="nextButton" onclick="articles.get('нюансы');">всякие нюансы</button>
+<button class="nextButton" onclick="goto('нюансы.html')">всякие нюансы</button>
 </template>
 </body>
 </html>

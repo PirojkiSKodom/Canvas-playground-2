@@ -6,13 +6,18 @@
     <title>docs</title>
 </head>
 <body>
-    <nav id="nav">
-        <button id='PGLink'>Песочница</button>
-        <div id="pageList">
-            <li data-link='вступление.html'><button>вступление</button></li>
-            <li data-link='нюансы.html'><button>нюансы</button></li>
-        </div>
-    </nav>
-    <main id="main"></main>
+    <div id='flexContainer'>
+        <nav id="nav">
+            <button id='PGLink' onclick="window.location.href='index.html'">Песочница</button>
+            <div id="pageList">
+                <li data-link='вступление.html'><button>вступление</button></li>
+                <li data-link='как определить Example.html'><button>как определить Example</button></li>
+                <li data-link='обзор Example.html'><button>обзор Example</button></li>
+                <li data-link='нюансы.html'><button>нюансы</button></li>
+                <li data-link='дополнительные инструменты.html'><button>дополнительные инструменты</button></li>
+            </div>
+        </nav>
+        <main id="main"></main>
+    </div>
 </body>
 </html>

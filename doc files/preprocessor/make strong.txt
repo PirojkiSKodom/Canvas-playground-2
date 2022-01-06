@@ -1,0 +1,5 @@
+ExampleClass.js
+Example
+Canvas
+draw()
+ебаный рот этих регэкспов, блеать
